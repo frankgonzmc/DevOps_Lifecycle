@@ -4,8 +4,15 @@ services:
     container_name: django_app
     ports:
       - "8000:8000"  # Exponer el puerto 8000 para pruebas directas
+    #FOR DEVELOPMENT
     volumes:
       - .:/my_project
+    #FOR PRODUCTIOM
+    #volumes:
+    #  - static_volume:/app/static
+    #  - media_volume:/app/media
+    depends_on:
+      - postgres
     networks:
       - mynetwork
 
@@ -22,7 +29,7 @@ services:
       - mynetwork
 
   postgres:
-    image: postgres_latest
+    image: postgres:15
     container_name: postgres_db
     environment:
       POSTGRES_DB: mydatabase
@@ -32,8 +39,6 @@ services:
       - "5432:5432"  # Exponer el puerto 5432 para conexiones a la base de datos
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    depends_on:
-      - django
     networks:
       - mynetwork
 
