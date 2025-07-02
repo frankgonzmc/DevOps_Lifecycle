@@ -1,0 +1,26 @@
+services:
+  django:
+    build: .
+    container_name: django_app
+    ports:
+      - "8000:8000"  # Exponer el puerto 8000 para pruebas directas
+    volumes:
+      - .:/my_project
+    networks:
+      - mynetwork
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"  # Exponer el puerto 80
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - django
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
