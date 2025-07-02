@@ -21,6 +21,23 @@ services:
     networks:
       - mynetwork
 
+  postgres:
+    image: postgres_latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"  # Exponer el puerto 5432 para conexiones a la base de datos
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    depends_on:
+      - django
+    networks:
+      - mynetwork
+
+
 networks:
   mynetwork:
     driver: bridge
