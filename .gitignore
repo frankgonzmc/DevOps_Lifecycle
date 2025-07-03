@@ -1,13 +1,32 @@
-# Ignorar directorios __pycache__ en cualquier lugar del proyecto
+# Python
 __pycache__/
-
-# Ignorar archivos .pyc en cualquier lugar del proyecto
-*.pyc
-
-# Ignorar los archivos de migración generados por Django
+*.py[cod]
+*.sqlite3
 *.log
-*.pot
+
+# Django
 *.pyc
-__pycache__/
-*/__pycache__/
-migrations/
+db.sqlite3
+/static/
+/media/
+
+# Entornos
+.env
+*.env
+
+# Docker
+*.pid
+*.sock
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
+
+# Node (si llegas a usar)
+node_modules/
+
+# GitHub Actions temporales
+.github/workflows/*.log
