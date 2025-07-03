@@ -8,3 +8,9 @@ docker-compose up --build
 ###Ejecutar en Desppliegue###
 cp .env.production .env
 ./scripts/deploy.sh
+
+###EXECUTE deploy.sh to deploy local###
+./scripts/deploy.sh dev
+
+###EXECUTE deploy.sh to deploy in production###
+./scripts/deploy.sh prod
