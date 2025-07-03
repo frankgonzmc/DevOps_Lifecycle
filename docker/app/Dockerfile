@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 COPY ../../requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ../../backend/ .
+COPY ../../my_project/ .
 
 RUN mkdir -p /app/static /app/media
 RUN python manage.py collectstatic --noinput
