@@ -1,50 +1,48 @@
 services:
-  django:
-    build: .
+  web:
+    build:
+      context: ./docker/app
     container_name: django_app
-    ports:
-      - "8000:8000"  # Exponer el puerto 8000 para pruebas directas
-    #FOR DEVELOPMENT
     volumes:
-      - .:/my_project
-    #FOR PRODUCTIOM
-    #volumes:
-    #  - static_volume:/app/static
-    #  - media_volume:/app/media
+      - static_volume:/app/static
+      - media_volume:/app/media
+    env_file:
+      - .env
     depends_on:
-      - postgres
+      - db
     networks:
-      - mynetwork
+      - backend
 
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "80:80"  # Exponer el puerto 80
+      - "80:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/static
       - media_volume:/media
     depends_on:
-      - django
+      - web
     networks:
-      - mynetwork
+      - backend
 
-  postgres:
+  db:
     image: postgres:15
     container_name: postgres_db
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"  # Exponer el puerto 5432 para conexiones a la base de datos
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
-      - mynetwork
+      - backend
 
+volumes:
+  static_volume:
+  media_volume:
+  postgres_data:
 
 networks:
-  mynetwork:
-    driver: bridge
+  backend:
