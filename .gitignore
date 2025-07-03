@@ -13,6 +13,8 @@ db.sqlite3
 # Entornos
 .env
 *.env
+.env.development
+.env.production
 
 # Docker
 *.pid
@@ -30,3 +32,5 @@ node_modules/
 
 # GitHub Actions temporales
 .github/workflows/*.log
+
+postgres_data/
