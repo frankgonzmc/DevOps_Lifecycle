@@ -1,3 +1,4 @@
-resource "aws_instance" "vm_django"{
+resource "aws_instance" "django_server"{
+    ami = var.ami_id
     
 }
