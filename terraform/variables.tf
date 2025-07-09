@@ -9,6 +9,11 @@ variable "network_subnet_public" {
     type        = string
 }
 
+variable "network_subnet_private" {
+    description = "value of the private subnet CIDR block"
+    type        = string
+}
+
 variable "availability_zone" {
     description = "Availability zone for the public subnet"
     type        = string

@@ -39,3 +39,14 @@ resource "aws_route_table_association" "route_table_association_subnet_public"{
     subnet_id = aws_subnet.subnet_public.id
     route_table_id = aws_route_table.table_route_subnet_public.id
 }
+
+
+resource "aws_subnet" "subnet_private"{
+    vpc_id = aws_vpc.vpc.id
+    cidr_block = var.network_subnet_private
+    availability_zone = var.availability_zone
+    map_public_ip_on_launch = false # Do not assign public IPs to instances in this subnet
+    tags = {
+        Name = "subnet_private"
+    }
+}

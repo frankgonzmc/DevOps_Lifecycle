@@ -13,3 +13,8 @@ variable "availability_zone" {
     type        = string
     default     = "us-east-1a"
 }
+
+variable "network_subnet_private" {
+    description = "value of the private subnet CIDR block"
+    type        = string
+}
