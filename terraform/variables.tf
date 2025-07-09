@@ -19,3 +19,8 @@ variable "availability_zone" {
     type        = string
     default     = "us-east-1a"
 }
+
+variable "my_ip" {
+    description = "Your IP address"
+    type        = string
+}
