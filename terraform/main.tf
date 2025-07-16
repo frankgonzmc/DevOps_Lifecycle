@@ -31,3 +31,14 @@ module "ec2_instance" {
   instance_type     = var.instance_type
   key_name          = module.key_pair.key_name
 }
+
+module "rds" {
+  source = "./modules/rds"
+
+  private_subnet_ids     = module.vpc.private_subnet_ids
+  rds_security_group_id  = module.sg_rds.id
+
+  db_identifier          = "my-rds-db"
+  db_username            = var.db_username
+  db_password            = var.db_password
+}

@@ -35,3 +35,14 @@ variable "instance_type" {
     description = "Instance type"
     type = string
 }
+
+#RDS
+variable "db_username" {
+    description = "value"
+    type = string
+}
+
+variable "db_password" {
+    description = "value"
+    type = string
+}
