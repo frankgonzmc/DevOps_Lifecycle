@@ -24,3 +24,14 @@ variable "my_ip" {
     description = "Your IP address"
     type        = string
 }
+
+#EC2
+variable "ami_id"{
+    description = "ami ID"
+    type = string
+}
+
+variable "instance_type" {
+    description = "Instance type"
+    type = string
+}
