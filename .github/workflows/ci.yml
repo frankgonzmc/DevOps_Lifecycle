@@ -7,6 +7,12 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+    paths:
+      - 'my_project/**'
+      - 'docker/**'
+      - 'terraform/**'
+      - '.github/workflows/ci.yml'
+      - 'scripts/**'
 
 jobs:
   build:
@@ -15,7 +21,14 @@ jobs:
     env:
       ENV: dev
       DJANGO_SECRET_KEY: dummysecret
+      SECRET_KEY: dummysecret
       DEBUG: "True"
+      ALLOWED_HOSTS: 127.0.0.1,localhost
+      DB_NAME: db_test
+      DB_USER: user
+      DB_PASSWORD: pass
+      DB_HOST: localhost
+      DB_PORT: "5432"
 
     services:
       postgres:
@@ -32,15 +45,6 @@ jobs:
           --health-timeout 5s
           --health-retries 5
           
-    env:  # <- Aquí van las variables de entorno para settings.py
-      SECRET_KEY: dummysecret
-      DEBUG: "True"
-      ALLOWED_HOSTS: 127.0.0.1,localhost
-      DB_NAME: db_test
-      DB_USER: user
-      DB_PASSWORD: pass
-      DB_HOST: localhost
-      DB_PORT: "5432"
 
     steps:
     - name: Clonar el repositorio
