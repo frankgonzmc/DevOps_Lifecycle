@@ -70,10 +70,12 @@ jobs:
     - name: Configurar variables y migraciones
       run: |
         python manage.py migrate
+      working-directory: ./my_project
 
     - name: Ejecutar pruebas
       run: |
         python manage.py test
+      working-directory: ./my_project
       
     - name: Validar formato de Terraform
       run: terraform fmt -check -recursive
