@@ -1,8 +1,8 @@
 module "vpc" {
-    source = "./modules/vpc"
-    network_vpc          = var.network_vpc
-    network_subnet_public = var.network_subnet_public
-    network_subnet_private = var.network_subnet_private
+  source                 = "./modules/vpc"
+  network_vpc            = var.network_vpc
+  network_subnet_public  = var.network_subnet_public
+  network_subnet_private = var.network_subnet_private
 }
 
 module "sg_ec2" {
@@ -12,9 +12,9 @@ module "sg_ec2" {
 }
 
 module "sg_rds" {
-  source      = "./modules/security_group_rds"
-  vpc_id      = module.vpc.vpc_id
-  ec2_sg_id   = module.sg_ec2.security_group_id
+  source    = "./modules/security_group_rds"
+  vpc_id    = module.vpc.vpc_id
+  ec2_sg_id = module.sg_ec2.security_group_id
 }
 
 module "key_pair" {
@@ -35,10 +35,10 @@ module "ec2_instance" {
 module "rds" {
   source = "./modules/rds"
 
-  private_subnet_ids     = module.vpc.private_subnet_ids
-  rds_security_group_id  = module.sg_rds.id
+  private_subnet_ids    = module.vpc.private_subnet_ids
+  rds_security_group_id = module.sg_rds.id
 
-  db_identifier          = "my-rds-db"
-  db_username            = var.db_username
-  db_password            = var.db_password
+  db_identifier = "my-rds-db"
+  db_username   = var.db_username
+  db_password   = var.db_password
 }
