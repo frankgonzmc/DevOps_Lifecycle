@@ -69,6 +69,8 @@ jobs:
 
     - name: Configurar variables y migraciones
       run: |
+        python manage.py makemigrations --noinput
+        python manage.py migrate --noinput
         python manage.py migrate
       working-directory: ./my_project
 
