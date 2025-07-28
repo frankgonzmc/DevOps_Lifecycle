@@ -24,7 +24,7 @@ module "key_pair" {
 }
 
 module "ec2_instance" {
-  source            = "./modules/ec2_instance"
+  source            = "./modules/ec2"
   ami_id            = var.ami_id
   subnet_id         = module.vpc.subnet_public_id
   security_group_id = module.sg_ec2.security_group_id
